@@ -2,8 +2,8 @@ package constants;
 
 import enums.StrategyType;
 import interfaces.Strategy;
-import model.RandomStrategy;
-import model.StaticStrategy;
+import service.RandomStrategy;
+import service.StaticStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
