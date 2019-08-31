@@ -1,4 +1,4 @@
-import model.Game;
+import service.Game;
 
 public class Main {
 

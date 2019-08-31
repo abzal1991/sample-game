@@ -1,6 +1,7 @@
-package model;
+package service;
 
 import enums.StrategyType;
+import model.Player;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,7 +17,8 @@ public class Game {
         startNumbers = Arrays.asList(4,5,1,3,5,6,7,0);
         Player player1 = new Player("Player1", StrategyType.STATIC,new LinkedList<>(startNumbers));
         Player player2 = new Player("Player2", StrategyType.RANDOM,new LinkedList<>(startNumbers));
-        players = Arrays.asList(player1,player2);
+        Player player3 = new Player("Player3", StrategyType.RANDOM,new LinkedList<>(startNumbers));
+        players = Arrays.asList(player1,player2,player3);
     }
 
     public int start() {
@@ -24,7 +26,8 @@ public class Game {
             int rounds = 1;
             while(rounds <= startNumbers.size()) {
                 System.out.println("ROUND "+rounds+":");
-                Integer winnerChoice = Collections.max(players, Comparator.comparing(Player::makeChoice)).getCurrentChoice();
+                players.forEach(Player::makeChoice);
+                Integer winnerChoice = Collections.max(players, Comparator.comparing(Player::getCurrentChoice)).getCurrentChoice();
                 players.forEach(player -> {
                     System.out.println(player.getId()+" chose "+player.getCurrentChoice());
                     if(winnerChoice.equals(player.getCurrentChoice())) {
@@ -46,6 +49,7 @@ public class Game {
 
             return 0;
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Game has ended abnormally");
             return -1;
         }
